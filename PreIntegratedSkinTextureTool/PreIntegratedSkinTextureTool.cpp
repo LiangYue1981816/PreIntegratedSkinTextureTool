@@ -1,4 +1,4 @@
-﻿// PreIntegratedSkinTextureTool.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// 参考 https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch14.html
 //
 
 #include "pch.h"
@@ -85,7 +85,7 @@ int main()
 				float ndl = glm::mix(-1.0f, 1.0f, 1.0f * x / resolution);
 				float invr = 2.0f / ((y + 1.0f) / (float)resolution); //1.0f * y / resolution;
 
-				float spec = pow(PHBeckmann(1.0f * x / resolution, 1.0f - 1.0f * y / (float)resolution), 0.1f);
+				float spec = 0.5f * pow(PHBeckmann(1.0f * x / resolution, 1.0f - 1.0f * y / (float)resolution), 0.1f);
 				glm::vec3 diffuse = IntegrateDiffuseScatteringOnRing(ndl, invr);
 
 				int r = (int)(diffuse.r * 255.0f + 0.5f);
