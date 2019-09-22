@@ -102,6 +102,7 @@ int main()
 			}
 		}
 	}
+	texture = gli::flip(texture);
 	gli::save_dds(texture, "PreIntegratedSkinLUT.dds");
 
 	return 0;
