@@ -20,6 +20,11 @@ float clamp(float value, float minValue, float maxValue)
 	return value;
 }
 
+glm::vec3 Linear2Gamma(glm::vec3 linear)
+{
+	return glm::pow(linear, glm::vec3(1.0f / 2.2f));
+}
+
 float Gaussian(float v, float r)
 {
 	return 1.0f / sqrt(2.0f * PI * v) * exp(-(r * r) / (2.0f * v));
