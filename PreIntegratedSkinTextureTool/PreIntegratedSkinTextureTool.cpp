@@ -57,7 +57,7 @@ glm::vec3 Scatter(float r)
 glm::vec3 IntegrateDiffuseScatteringOnRing(float cosTheta, float skinRadius)
 {
 	float a = -PI / 2.0f;
-	float inc = 0.05f;
+	float inc = 0.01f;
 	float theta = acos(cosTheta);
 
 	glm::vec3 totalLight(0.0f, 0.0f, 0.0f);
@@ -92,7 +92,7 @@ void SetTexturePixelColor(gli::texture2d &texture, int x, int y, const gen_type 
 
 int main()
 {
-	const int resolution = 128;
+	const int resolution = 256;
 
 	gli::texture2d texture(gli::FORMAT_RGBA8_UNORM_PACK8, gli::extent2d(resolution, resolution));
 	{
@@ -103,6 +103,8 @@ int main()
 
 				float spec = 0.5f * pow(PHBeckmann(1.0f * x / resolution, 1.0f - 1.0f * y / (float)resolution), 0.1f);
 				glm::vec3 diffuse = IntegrateDiffuseScatteringOnRing(ndl, invr);
+				diffuse = ToneMapping(diffuse);
+				diffuse = Linear2Gamma(diffuse);
 
 				int r = (int)(diffuse.r * 255.0f + 0.5f);
 				int g = (int)(diffuse.g * 255.0f + 0.5f);
